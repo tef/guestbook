@@ -1,4 +1,3 @@
-guestbook
-=========
-
-It's 2015.
+<p align="center">
+    <img src="book.png">
+</p>
