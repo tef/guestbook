@@ -1,3 +1,3 @@
 <p align="center">
-    <img src="book.png">
+    <img src="/assets/img/book.png">
 </p>
