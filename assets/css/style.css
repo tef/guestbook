@@ -1,7 +1,62 @@
 body {
     background-color: #9BD1E5;
+    font-family: monospace;
+}
+
+header {
+    text-align: center;
+}
+
+header img {
+    width: 50%;
 }
 
 h1 {
     color: #FC24AA;
+}
+
+.post {
+
+}
+
+.post a {
+
+}
+
+.comment {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.date {
+
+}
+
+.details {
+    background-color: #004855;
+    color: #FFA500;
+}
+
+.details a {
+    color: #FFA500;    
+}
+
+footer {
+
+}
+
+#counter {
+    background-color: #808080;
+}
+
+#count {
+    color: #FFFFFF;
+}
+
+#personal {
+    color: #FFFFFF;
+}
+
+#personal a {
+    color: #FFFFFF;
 }
