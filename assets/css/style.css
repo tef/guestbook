@@ -16,6 +16,11 @@ h1 {
     color: #FC24AA;
 }
 
+main {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
 .post {
 
 }
@@ -43,11 +48,15 @@ h1 {
 }
 
 footer {
-
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #counter {
     background-color: #808080;
+    max-width: 4em;
+    margin: 0 auto;
 }
 
 #count {
