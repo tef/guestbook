@@ -8,7 +8,8 @@ header {
 }
 
 header img {
-    width: 50%;
+    width: 60%;
+    max-width: 35em;
 }
 
 h1 {
@@ -38,7 +39,7 @@ h1 {
 }
 
 .details a {
-    color: #FFA500;    
+    color: #FFA500;
 }
 
 footer {
