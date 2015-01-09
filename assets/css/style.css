@@ -1,6 +1,8 @@
 body {
     background-color: #9BD1E5;
     font-family: monospace;
+    line-height: 1.5em;
+    font-size: 1.125em;
 }
 
 header {
@@ -9,11 +11,20 @@ header {
 
 header img {
     width: 60%;
-    max-width: 35em;
+    max-width: 30em;
 }
 
 h1 {
     color: #FC24AA;
+    font-size: 2.827em;
+}
+
+h2 {
+    font-size: 1.999em;
+}
+
+h3 {
+    font-size: 1.414em;
 }
 
 main {
@@ -29,18 +40,32 @@ main {
 
 }
 
+hr {
+    border: 0;
+    height: 37px;
+    background: url(/assets/img/hr.png) 50% 0 no-repeat;
+    margin: 1.5em 0;
+}
+
 .comment {
     background-color: #FFFFFF;
     color: #000000;
+    padding: 0.5em;
+}
+
+.text {
+    margin: 0 0 0.5em 0;
 }
 
 .date {
-
+    margin: 0;
+    text-align: right;
 }
 
 .details {
     background-color: #004855;
     color: #FFA500;
+    padding: 0.5em;
 }
 
 .details a {
