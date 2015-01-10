@@ -6,6 +6,7 @@ import cgitb; cgitb.enable()
 import re
 
 from peewee import *
+from datetime import date
 
 # Tell peewee what the database file is
 # We use capital letters for this variable name according to custom, as it indicates
@@ -29,6 +30,7 @@ class Post(BaseModel):
     date = DateTimeField()
 
 template_file = "index.html"
+form_file = "form.html"
 
 def display(content):
     # Open template file in read only mode
@@ -85,4 +87,49 @@ def list_posts():
 
     return guestbook_post
 
+def create_post():
+    try:
+        comment = form["comment"].value
+    except:
+        comment = "I didn't enter a comment :("
+
+    try:
+        name = form["name"].value
+    except:
+        print("Content-type: text/html")
+        print()
+        print("You need to at least submit a name. Please go back and try again!")
+        raise SystemExit
+
+    try:
+        email = form["email"].value
+    except:
+        email = None
+
+    try:
+        website = form["website"].value
+    except:
+        website = None
+
+    post = Post.create(
+        comment=comment,
+        name=form["name"].value,
+        email=email,
+        website=website,
+        date=date.today().strftime("%d/%m/%y")
+    )
+
+# When we've submitted the form, this method will collect all the form data
+form = cgi.FieldStorage()
+
+try:
+    key = form["key"].value
+except:
+    key = None
+
+
+if key == "process":
+    create_post()
+
+# Display the guestbook!
 display(list_posts())
