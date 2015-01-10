@@ -1,22 +1,61 @@
-<form method="post" action="/cgi-bin/script.py">
-    <input type="hidden" name="key" value="process">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Sign my Guestbook! - Submit a post</title>
 
-    <label for="comment">Comment</label>
-    <br>
-    <textarea name="comment" rows="25" cols="100">Say something awesome!</textarea>
+    <meta name="author" content="Charlotte Spencer">
+    <meta name="description" content="A Guestbook for 2015">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <br>
+    <!-- Styles -->
+    <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
 
-    <label for="name">Name</label>
-    <input type="text" name="name">
+<body>
+    <header role="banner">
+        <img src="/assets/img/book.png">
+    </header>
 
-    <label for="email">@</label>
-    <input type="email" name="email">
+    <main role="main">
+        <div class="sign">
+            <a href="/cgi-bin/script.py">Go back!</a>
+        </div>
+        <form method="post" action="/cgi-bin/script.py">
+            <input type="hidden" name="key" value="process">
 
-    <label for="website">WWW</label>
-    <input type="text" name="website">
+            <label for="comment">Comment</label>
+            <br>
+            <textarea name="comment" rows="7" cols="68" placeholder="Say something ~*~*magical*~*~"></textarea>
 
-    <br>
+            <br>
 
-    <input type="submit" value="Submit">
-</form>
+            <label for="name">Name</label><input type="text" name="name">
+
+            <br>
+
+            <label for="email">Mail</label><input type="email" name="email">
+
+            <br>
+
+            <label for="website">Site</label><input type="text" name="website">
+
+            <br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+
+    <footer role="contentinfo">
+        <div id="personal">
+            <p>
+                made by <a href="http://charlotteis.github.io">charlotteis</a>
+            </p>
+        </div>
+
+    </footer>
+</body>
+
+</html>
