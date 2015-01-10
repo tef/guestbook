@@ -6,7 +6,7 @@ import cgitb; cgitb.enable()
 import re
 
 from peewee import *
-from datetime import date
+from datetime import datetime
 
 # Tell peewee what the database file is
 # We use capital letters for this variable name according to custom, as it indicates
@@ -116,7 +116,7 @@ def create_post():
         name=form["name"].value,
         email=email,
         website=website,
-        date=date.today().strftime("%d/%m/%y")
+        date=datetime.now().strftime("%H:%M - %d/%m/%y")
     )
 
 # When we've submitted the form, this method will collect all the form data

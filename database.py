@@ -1,11 +1,11 @@
+from datetime import datetime
 from peewee import *
-from datetime import date
 
 # Tell peewee what the database file is
 # We use capital letters for this variable name according to custom, as it indicates
 # something that will not change
 DATABASE = "guestbook.db"
-DATE = date.today().strftime("%d/%m/%y")
+DATE = datetime.now().strftime("%H:%M - %d/%m/%y")
 # Tell peewee to create a sqllite datbase called guestbook.db
 database = SqliteDatabase(DATABASE)
 
