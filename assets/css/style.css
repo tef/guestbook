@@ -88,8 +88,9 @@ footer {
 
 #counter {
     background-color: #808080;
-    max-width: 4em;
     margin: 0 auto;
+    max-width: 10em;
+    text-align: center;
 }
 
 #count {

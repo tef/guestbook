@@ -8,6 +8,7 @@ import re
 from peewee import *
 from datetime import datetime
 
+
 # Tell peewee what the database file is
 # We use capital letters for this variable name according to custom, as it indicates
 # something that will not change
@@ -51,9 +52,9 @@ def display(content):
     print()
     print(sub_result[0])
 
-def list_posts():
+def guestbook():
     guestbook_post = ""
-    for post in Post.select():
+    for post in Post.select().limit(10):
         guestbook_post += """<div class='post'>
                                 <div class='comment'>
                                     <p class='text'>
@@ -84,8 +85,29 @@ def list_posts():
 
                              <hr>
                           """
+    def visitor_counter():
+        counter = open("counter.txt", "r")
+        line = counter.readline()
+        counter.close()
 
-    return guestbook_post
+        if line == "":
+            number = 1
+        else:
+            number = int(line) + 1
+
+        counter = open("counter.txt", "w")
+        counter.write(str(number))
+        counter.close()
+
+        visits = """
+        <div id="counter">
+            <p id="count">{0} visitors</p>
+        </div>
+        """.format(number)
+
+        return visits
+
+    return guestbook_post + visitor_counter()
 
 def create_post():
     try:
@@ -132,4 +154,4 @@ if key == "process":
     create_post()
 
 # Display the guestbook!
-display(list_posts())
+display(guestbook())
