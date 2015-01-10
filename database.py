@@ -5,7 +5,7 @@ from datetime import date
 # We use capital letters for this variable name according to custom, as it indicates
 # something that will not change
 DATABASE = "guestbook.db"
-DATE = date.today().strftime("%d-%m-%y")
+DATE = date.today().strftime("%d/%m/%y")
 # Tell peewee to create a sqllite datbase called guestbook.db
 database = SqliteDatabase(DATABASE)
 
@@ -31,7 +31,7 @@ def create_tables():
     database.create_tables([Post])
     database.close()
 
-create_tables()
+# create_tables()
 
 database.connect()
 
