@@ -63,17 +63,25 @@ def list_posts():
                                 </div>
 
                                 <div class="details">
-                                    <span class='name'>{2} |</span>
-                                    <span class='email'>
-                                        <a href='mailto:{3}'>@</a> |
-                                    </span>
-                                    <span class='website'>
-                                        <a href='{4}'>WWW</a>
-                                    </span>
-                                </div>
-                            </div>
+                                    <span class='name'>{2}</span>
+                          """.format(post.comment, post.date, post.name)
+        if post.email:
+            guestbook_post += """<span class='email'>
+                                    | <a href='mailto:{0}'>@</a>
+                                </span>
+                              """.format(post.email)
 
-                            <hr>""".format(post.comment, post.date, post.name, post.email, post.website)
+        if post.website:
+            guestbook_post += """<span class='website'>
+                                    | <a href='{0}'>WWW</a>
+                                 </span>
+                              """.format(post.website)
+
+        guestbook_post += """</div>
+                             </div>
+
+                             <hr>
+                          """
 
     return guestbook_post
 
