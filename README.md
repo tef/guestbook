@@ -21,7 +21,7 @@ by scripts on the server side. In this repo; the CGI script `script.py` fetches 
 within the database and inserts them into the `index.html` template which it the displays.
 `script.py` also processes the information submitted through the guestbook form `form.html`
 
-### How can I use this guestbook?
+## How can I use this guestbook?
 **NB: So far these instructions will only cover running the guestbook locally.
 Some may be able to work out how to get it onto their own server fairly easily but
 I intend to write instructions for it. My main focus however is working out how to run
