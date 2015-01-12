@@ -100,7 +100,7 @@ Now, we're ready to run our guestbook!
 In your terminal, type: `python3 server.py`
 
 Navigate to `http://localhost:8000/cgi-bin/script.py` and you should see the guestbook
-in all it's glory!
+in all it's glory! It should look something like [this](/assets/img/final.png)
 
 ---
 
