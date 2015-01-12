@@ -1,15 +1,16 @@
-from datetime import datetime
+# Peewee allows us to worth with the database
 from peewee import *
+# Import datetime to use nicely formatted dates in our database
+from datetime import datetime
 
 # Tell peewee what the database file is
-# We use capital letters for this variable name according to custom, as it indicates
-# something that will not change
 DATABASE = "guestbook.db"
+# The dates will look like: 20:52 - 28/04/1991
 DATE = datetime.now().strftime("%H:%M - %d/%m/%y")
 # Tell peewee to create a sqllite datbase called guestbook.db
 database = SqliteDatabase(DATABASE)
 
-# All models will inherit from this BaseModel, it saves us defined the database
+# All models will inherit from this BaseModel, it saves us defining the database
 # to use every time we create a new model
 class BaseModel(Model):
     class Meta:
@@ -33,9 +34,10 @@ def create_tables():
 
 # create_tables()
 
+# Connect to the database to work with it
 database.connect()
 
-# Add a post to the database
+# Add some dummy posts to the database, feel free to change or delete this code
 post_one = Post.create(name="Jamiroquai", website="http://www.jamiroquai.co.uk", \
 comment="Charlotte this guestbook is off the chain! You are 2kool4skool. Love Jam.", \
 date=DATE)
@@ -45,4 +47,4 @@ post_two = Post.create(name="Satan", comment="666lol", date=DATE)
 # Close the database
 database.close()
 
-print("Created a table!")
+print("Created the database!")
