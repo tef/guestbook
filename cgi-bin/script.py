@@ -110,9 +110,10 @@ def guestbook():
             Currently executed each time the script is loaded (which is bad)
         """
 
-        # The counter is stored in 'counter.txt', open the file for reading and writing (r+)
-        counter = open("counter.txt", "r+")
+        # The counter is stored in 'counter.txt', open the file for reading (r+)
+        counter = open("counter.txt", "r")
         line = counter.readline()
+        counter.close()
 
         # If 'counter.txt' is empty, add a count of one,
         # If a number already exists, add one to it
@@ -121,6 +122,8 @@ def guestbook():
         else:
             number = int(line) + 1
 
+        # Open counter for writing
+        counter = open("counter.txt", "w")
         # Add the counter to counter.txt
         counter.write(str(number))
         # Close the counter.txt file
