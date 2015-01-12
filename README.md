@@ -1,14 +1,18 @@
 <p align="center">
-    <img src="/assets/img/book.png" style="width: 60%;
-    max-width: 30em;">
+<img src="/assets/img/book.png" style="width: 60%;
+max-width: 30em;">
 </p>
 
 ## What is "Guestbook"?
-When I first started using the Internet around 2002, guestbooks were fairly popular.
+
+
+When I first started using the Internet, guestbooks were popular.
 I'd be able to go to a website like [Lissa Explains](http://www.lissaexplains.com/guestbook.shtml)
-(which serves as the inspiration for this project) and leave a message with my name
-and a comment to the author of the website. It was a way of messaging people before you had
-your Facebook's and your Twitters. For me, it was my first understanding that people
+(which serves as the inspiration for this project) and leave a message with my name and a
+comment to the author of the website. It was a way of messaging people before you had
+your Facebooks and your Twitters.
+
+For me, it was my first understanding that people
 all over the world could converge at the same place at the same time, to talk to each other.
 
 ## What is "cgi"?
@@ -17,14 +21,16 @@ Before you had your cool frameworks like Django and the like, programmers would 
 to power their dynamic content.
 
 By dynamic content I mean content that is served or controlled
-by scripts on the server side. In this repo; the CGI script `script.py` fetches the guestbook posts
-within the database and inserts them into the `index.html` template which it the displays.
+by scripts on the server side. In this repo; the CGI script `script.py` fetches
+the guestbook posts within the database and inserts them into the `index.html` template.
+
+
 `script.py` also processes the information submitted through the guestbook form `form.html`
 
 ## How can I use this guestbook?
 **NB: So far these instructions will only cover running the guestbook locally.
-Some may be able to work out how to get it onto their own server fairly easily but
-I intend to write instructions for it. My main focus however is working out how to run
+Some may be able to work out how to get it onto their own server easily but
+I intend to write instructions for it. But my main focus is working out how to run
 this project on a free application hosting service like [Heroku](https://www.heroku.com).
 [Help with this is appreciated](https://github.com/Charlotteis/guestbook/issues/1)**.
 
@@ -40,11 +46,11 @@ OR by downloading the [.zip file](https://github.com/Charlotteis/guestbook/archi
 
 ### Step Two: Install the required packages!
 I recommend working within a [virtual environment](https://virtualenv.pypa.io/en/latest/)
-when you work with this code, because it keeps all of your dependencies nice and tidy
+when you work with this code, because it keeps all your dependencies nice and tidy
 and things are less likely to break.
 
 Check the `requirements.txt` file for the required dependencies.
-The only dependency we are using for this application is [peewee](https://peewee.readthedocs.org/en/latest/)
+The only one we are using for this application is [peewee](https://peewee.readthedocs.org/en/latest/)
 which helps to manage our guestbook database. To install peewee you will need to have [pip]
 (https://pypi.python.org/pypi/pip) already installed.
 
@@ -55,8 +61,8 @@ Within your virtual environment run the following command:
 ### Step Three: Create your database!
 
 First, check out the `database.py` file. This is what we will run to create our database.
-The line: `DATABASE = "guestbook.db"` sets the name of your database. If you want it to
-be called something else, change `"guestbook.db"` to "`whateveryouwant.db`"
+The line: `DATABASE = "guestbook.db"` sets the name of your database. If you want
+it to be called something else, change `"guestbook.db"` to "`whateveryouwant.db`"
 
 Second, check out the dummy posts that will be created when you run this file.
 Unless you change it, it will create some default posts in my name. Feel free to change the details
@@ -87,7 +93,7 @@ so cgi knows what python version it is using. The guestbook _may_ work with this
 But all our machines are likely different so you need to check. This may be simply done by running
 `which python3` within your terminal. Copy the output and put it at the top of `script.py` with the `#!` at the start.
 
-Know that `script.py` must reside within the cgi-bin folder or else it won't work!
+Know that `script.py` must live within the cgi-bin folder or else it won't work!
 
 Now, we're ready to run our guestbook!
 
