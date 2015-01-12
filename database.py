@@ -38,11 +38,17 @@ def create_tables():
 database.connect()
 
 # Add some dummy posts to the database, feel free to change or delete this code
-post_one = Post.create(name="Jamiroquai", website="http://www.jamiroquai.co.uk", \
-comment="Charlotte this guestbook is off the chain! You are 2kool4skool. Love Jam.", \
+post_one = Post.create(name="Charlotte", website="http://charlotteis.github.io", \
+comment="Thanks for installing my Guestbook!", \
 date=DATE)
 
-post_two = Post.create(name="Satan", comment="666lol", date=DATE)
+post_two = Post.create(name="Charlotte", website="http://twitter.com/charlotteis", \
+comment="Check out the code on GitHub, where you'll also find guides on how to use this.", \
+date=DATE)
+
+post_one = Post.create(name="GitHub", website="http://www.github.com/charlotteis/guestbook", \
+comment="Click on my WWW to see the code!", \
+date=DATE)
 
 # Close the database
 database.close()
