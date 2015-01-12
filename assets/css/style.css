@@ -87,22 +87,22 @@ footer {
 }
 
 #counter {
-    background-color: #808080;
+    background-color: #FFFFFF;
     margin: 0 auto;
     max-width: 10em;
     text-align: center;
 }
 
 #count {
-    color: #FFFFFF;
+    color: #000000;
 }
 
 #personal {
-    color: #FFFFFF;
+    color: #004855;
 }
 
 #personal a {
-    color: #FFFFFF;
+    color: #004855;
 }
 
 textarea {

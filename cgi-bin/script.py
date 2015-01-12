@@ -70,7 +70,7 @@ def guestbook():
     # For each of the ten posts, conver them to HTML
     for post in Post.select().limit(10).order_by(Post.date.desc()):
         # Start the individual post HTML
-        guestbook_post += """<div class='post'>
+        guestbook_post += """<article class='post' role="article">
                                 <div class='comment'>
                                     <p class='text'>
                                         {0}
@@ -87,20 +87,20 @@ def guestbook():
         # If an email was submitted, add it to the post
         if post.email:
             guestbook_post += """<span class='email'>
-                                    | <a href='mailto:{0}'>@</a>
+                                    | <a href='mailto:{0}' tabindex="1">@</a>
                                 </span>
                               """.format(post.email)
 
         # If a website was submitted, add it to the post
         if post.website:
             guestbook_post += """<span class='website'>
-                                    | <a href='{0}'>WWW</a>
+                                    | <a href='{0}' tabindex="1">WWW</a>
                                  </span>
                               """.format(post.website)
 
         # End the individual post HTML
         guestbook_post += """</div>
-                             </div>
+                             </article>
 
                              <hr>
                           """

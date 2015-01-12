@@ -16,42 +16,42 @@
 
 <body>
     <header role="banner">
-        <img src="/assets/img/book.png">
+        <img src="/assets/img/book.png" alt="Guestbook Logo">
     </header>
 
     <main role="main">
-        <div class="sign">
-            <a href="/cgi-bin/script.py">Go back!</a>
-        </div>
+        <nav class="sign" role="navigation">
+            <a href="/cgi-bin/script.py" tabindex="1">Go back!</a>
+        </nav>
         <form method="post" action="/cgi-bin/script.py">
             <input type="hidden" name="key" value="process">
 
             <label for="comment">Comment</label>
             <br>
-            <textarea name="comment" rows="7" cols="68" placeholder="Say something ~*~*magical*~*~"></textarea>
+            <textarea id="comment" name="comment" rows="7" cols="68" placeholder="Say something ~*~*magical*~*~" tabindex="1"></textarea>
 
             <br>
 
-            <label for="name">Name</label><input type="text" name="name">
+            <label for="name">Name</label><input id="name" type="text" name="name" tabindex="1">
 
             <br>
 
-            <label for="email">Mail</label><input type="email" name="email">
+            <label for="email">Mail</label><input id="email" type="email" name="email" tabindex="1">
 
             <br>
 
-            <label for="website">Site</label><input type="text" name="website">
+            <label for="website">Site</label><input id="website" type="text" name="website" tabindex="1">
 
             <br>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" tabindex="1">
         </form>
     </main>
 
     <footer role="contentinfo">
         <div id="personal">
             <p>
-                made by <a href="http://charlotteis.github.io">charlotteis</a>
+                made by <a href="http://charlotteis.github.io" tabindex="1">charlotteis</a>
             </p>
         </div>
 
