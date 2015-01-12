@@ -46,7 +46,7 @@ post_two = Post.create(name="Charlotte", website="http://twitter.com/charlotteis
 comment="Check out the code on GitHub, where you'll also find guides on how to use this.", \
 date=DATE)
 
-post_one = Post.create(name="GitHub", website="http://www.github.com/charlotteis/guestbook", \
+post_one = Post.create(name="GitHub", website="github.com/charlotteis/guestbook", \
 comment="Click on my WWW to see the code!", \
 date=DATE)
 

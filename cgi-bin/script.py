@@ -91,10 +91,17 @@ def guestbook():
                                 </span>
                               """.format(post.email)
 
-        # If a website was submitted, add it to the post
-        if post.website:
+        # If a website was submitted, and begins with "http://" or "https://", add to post
+        if post.website and (post.website.startswith("http://") or post.website.startswith("https://")):
             guestbook_post += """<span class='website'>
                                     | <a href='{0}' tabindex="1">WWW</a>
+                                 </span>
+                              """.format(post.website)
+        # Else if there is a website but it doesn't start with "http://" or https://
+        # Add "http://" to the start of the URL and add it to the post
+        elif post.website:
+            guestbook_post += """<span class='website'>
+                                    | <a href='http://{0}' tabindex="1">WWW</a>
                                  </span>
                               """.format(post.website)
 
