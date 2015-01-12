@@ -66,9 +66,9 @@ def guestbook():
     """
 
     guestbook_post = ""
-    # limit(10) means that only ten guestbook posts will be displayed
+    # limit(10) means that only the latest ten guestbook posts will be displayed
     # For each of the ten posts, conver them to HTML
-    for post in Post.select().limit(10):
+    for post in Post.select().limit(10).order_by(Post.date.desc()):
         # Start the individual post HTML
         guestbook_post += """<div class='post'>
                                 <div class='comment'>
