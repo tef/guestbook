@@ -105,8 +105,14 @@ footer {
     color: #004855;
 }
 
+input {
+    border-radius: 0;
+}
+
 textarea {
     border: none;
+    border-radius: 0;
+    margin-bottom: 0.5em;
 }
 
 input[type="text"] {
