@@ -137,12 +137,19 @@ def guestbook():
         counter.close()
 
         # Add the counter to the index page
-        visits = """
-        <div id="counter">
-            <p id="count">{0} visitors</p>
-        </div>
-        """.format(number)
-
+        if number == 1:
+            visits = """
+            <div id="counter">
+                <p id="count">{0} visitor</p>
+            </div>
+            """.format(number)
+        else:
+            visits = """
+            <div id="counter">
+                <p id="count">{0} visitors</p>
+            </div>
+            """.format(number)
+            
         return visits
 
     # Return the guestbook posts HTML, followed by the visitor counter
