@@ -1,4 +1,4 @@
-#!/Users/charlottespencer/.virtualenvs/guestbook/bin/python
+#!/usr/bin/python3
 
 import cgi
 # cgitb allows us to view cgi errors, best to comment it out when using in production
@@ -149,7 +149,7 @@ def guestbook():
                 <p id="count">{0} visitors</p>
             </div>
             """.format(number)
-            
+
         return visits
 
     # Return the guestbook posts HTML, followed by the visitor counter

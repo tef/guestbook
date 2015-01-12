@@ -88,7 +88,7 @@ within the server file.
 
 Now, check out `script.py` within the `cgi-bin` folder.
 The only thing you need to do is make sure the first line is correct. Currently it
-reads `#!/usr/local/bin/python3`. This statement needs to be at the top of script.py
+reads `#!/usr/bin/python3`. This statement needs to be at the top of script.py
 so cgi knows what python version it is using. The guestbook _may_ work with this line how it is.
 But all our machines are likely different so you need to check. This may be simply done by running
 `which python3` within your terminal. Copy the output and put it at the top of `script.py` with the `#!` at the start.
