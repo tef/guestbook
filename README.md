@@ -23,10 +23,12 @@ able to run scripts on your web server and displaying the results on your websit
 
 In this project; the script `script.py` fetches the guestbook posts within the database, and displays them within the `index.html` template. I have not written
 the HTML for each individual post within the index template, the script does that
-for me. The cgi server within `server.py` allows me to do this.
+for me. The cgi server within `server.py` allows me to do this on the website itself,
+each time someone visits the guestbook the cgi script is activated and the posts
+are displayed.
 
-In 2015 we have server-side languages like Ruby and Python, as well as client-side languages like JavaScript that can do this for us with ease. In fact, the cgi technology used in this project is powered by a cgi module within the Python language. This project
-is just a little homage to what the web was only a decade or so ago.
+In 2015 we have server-side languages like [Ruby](https://www.ruby-lang.org/en/) and [Python](https://www.python.org), as well as client-side languages like [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) that can do this for us with ease. In fact, the cgi technology used in this project is powered by a cgi module within the Python language. This project is just a little homage to what
+the web was only a decade or so ago.
 
 ## How can I use this guestbook?
 **NB: So far these instructions will only cover running the guestbook locally.
@@ -54,7 +56,7 @@ which helps to manage our guestbook database. To install peewee you will need to
 
 Within your virtual environment run the following command:
 
-`pip install peewee`
+`pip install -r requirements.txt`
 
 ### Step Three: Create your database!
 
