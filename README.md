@@ -1,10 +1,10 @@
+<img src="/assets/img/Python_3_blue.png" width="66" height="18">
 <p align="center">
 <img src="/assets/img/book.png" style="width: 60%;
 max-width: 30em;">
 </p>
 
 ## What is "Guestbook"?
-
 
 When I first started using the Internet, guestbooks were popular.
 I'd be able to go to a website like [Lissa Explains](http://www.lissaexplains.com/guestbook.shtml)
