@@ -30,7 +30,9 @@ are displayed.
 In 2015 we have server-side languages like [Ruby](https://www.ruby-lang.org/en/) and [Python](https://www.python.org), as well as client-side languages like [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) that can do this for us with ease without using cgi. This project is just a little homage to what
 the web was only a decade or so ago.
 
-<center><img src="/assets/img/hr.png"></center>
+<p align="center">
+    <img src="/assets/img/hr.png">
+</p>
 
 ## How can I use this guestbook?
 **NB: These instructions only cover running the guestbook locally.
