@@ -1,7 +1,7 @@
 import http.server
 
 PORT = 8000
-HOST = "127.0.0.1"
+HOST = "localhost"
 
 # This will display the site at `http://localhost:8000/`
 server_address = (HOST, PORT)
