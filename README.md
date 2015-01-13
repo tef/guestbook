@@ -17,22 +17,20 @@ all over the world could converge at the same place at the same time, to talk to
 
 ## What is "cgi"?
 Common Gateway Interface (CGI) was what these original guestbooks were powered on.
-Before you had your cool frameworks like Django and the like, programmers would use CGI
-to power their dynamic content.
+CGI was [introduced in 1993](http://en.wikipedia.org/wiki/Common_Gateway_Interface#History) and kickstarted
+the move from websites just displaying static HTML (unmodified by scripts) to being
+able to run scripts on your web server and displaying the results on your website.
 
-By dynamic content I mean content that is served or controlled
-by scripts on the server side. In this repo; the CGI script `script.py` fetches
-the guestbook posts within the database and inserts them into the `index.html` template.
+In this project; the script `script.py` fetches the guestbook posts within the database, and displays them within the `index.html` template. I have not written
+the HTML for each individual post within the index template, the script does that
+for me. The cgi server within `server.py` allows me to do this.
 
-
-`script.py` also processes the information submitted through the guestbook form `form.html`
+In 2015 we have server-side languages like Ruby and Python, as well as client-side languages like JavaScript that can do this for us with ease. In fact, the cgi technology used in this project is powered by a cgi module within the Python language. This project
+is just a little homage to what the web was only a decade or so ago.
 
 ## How can I use this guestbook?
 **NB: So far these instructions will only cover running the guestbook locally.
-Some may be able to work out how to get it onto their own server easily but
-I intend to write instructions for it. But my main focus is working out how to run
-this project on a free application hosting service like [Heroku](https://www.heroku.com).
-[Help with this is appreciated](https://github.com/Charlotteis/guestbook/issues/1)**.
+I'd like to write instructions on running this project on a free application hosting service like [Heroku](https://www.heroku.com). [Help with this is appreciated](https://github.com/Charlotteis/guestbook/issues/1)**.
 
 ### Step One: Grab the code!
 You can do this either by cloning the repository if you're familiar with the command line
