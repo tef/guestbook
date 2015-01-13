@@ -107,9 +107,10 @@ in all it's glory! It should look something like [this](/assets/img/final.png)
 ---
 
 ## With thanks to:
-- [@tef](https://twitter.com/tef) for the idea to go "Web 1.0" and use cgi in the first place
+- [@tef](https://twitter.com/tef) for the idea to go "Web 1.0" and use cgi in the first place as well as helping me debug
 - [@jennschiffer](https://twitter.com/jennschiffer) for creating [make8bitart.com](http://make8bitart.com) so I could make sick graphics
 - [Lissa Explains](http://lissaexplains.com) for still serving as inspiration, after all these years.
+- [pkqk](https://www.twitter.com/pkqk) and [tom](https://twitter.com/tomwhoscontrary) for helping me with the tricky bits
 
 ---
 
