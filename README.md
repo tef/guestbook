@@ -85,9 +85,7 @@ you can delete the database file, uncomment `create_tables()` and run `python3 d
 
 ### Step Four: Run the guestbook!
 Firstly, check out the `server.py` file. It's a small file that will allow you to run
-the files within this project locally on your machine.
-
-I've made it so the project files will run on localhost:8000. Feel free to change the `PORT`
+the files within this project locally on your machine. I've made it so the project files will run on localhost:8000. Feel free to change the `PORT`
 within the server file.
 
 Now, check out `script.py` within the `cgi-bin` folder.
