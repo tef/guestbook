@@ -4,7 +4,7 @@
 max-width: 30em;">
 </p>
 
-## What is "Guestbook"?
+## What is a "Guestbook"?
 
 When I first started using the Internet, guestbooks were popular.
 I'd be able to go to a website like [Lissa Explains](http://www.lissaexplains.com/guestbook.shtml)
@@ -27,11 +27,13 @@ for me. The cgi server within `server.py` allows me to do this on the website it
 each time someone visits the guestbook the cgi script is activated and the posts
 are displayed.
 
-In 2015 we have server-side languages like [Ruby](https://www.ruby-lang.org/en/) and [Python](https://www.python.org), as well as client-side languages like [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) that can do this for us with ease. In fact, the cgi technology used in this project is powered by a cgi module within the Python language. This project is just a little homage to what
+In 2015 we have server-side languages like [Ruby](https://www.ruby-lang.org/en/) and [Python](https://www.python.org), as well as client-side languages like [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) that can do this for us with ease without using cgi. This project is just a little homage to what
 the web was only a decade or so ago.
 
+<center><img src="/assets/img/hr.png"></center>
+
 ## How can I use this guestbook?
-**NB: So far these instructions will only cover running the guestbook locally.
+**NB: These instructions only cover running the guestbook locally.
 I'd like to write instructions on running this project on a free application hosting service like [Heroku](https://www.heroku.com). [Help with this is appreciated](https://github.com/Charlotteis/guestbook/issues/1)**.
 
 ### Step One: Grab the code!
@@ -84,7 +86,7 @@ You can now comment out `create_tables()`. If you want to re-create your databas
 you can delete the database file, uncomment `create_tables()` and run `python3 database.py` again.
 
 ### Step Four: Run the guestbook!
-Firstly, check out the `server.py` file. It's a small file that will allow you to run
+Take a look at the `server.py` file. It's a small file that will allow you to run
 the files within this project locally on your machine. I've made it so the project files will run on localhost:8000. Feel free to change the `PORT`
 within the server file.
 
@@ -92,7 +94,7 @@ Now, check out `script.py` within the `cgi-bin` folder.
 The only thing you need to do is make sure the first line is correct. Currently it
 reads `#!/usr/bin/python3`. This statement needs to be at the top of script.py
 so cgi knows what python version it is using. The guestbook _may_ work with this line how it is.
-But all our machines are likely different so you need to check. This may be simply done by running
+However, no computer is the same so you need to check. This may be simply done by running
 `which python3` within your terminal. Copy the output and put it at the top of `script.py` with the `#!` at the start.
 
 Know that `script.py` must live within the cgi-bin folder or else it won't work!
@@ -101,8 +103,7 @@ Now, we're ready to run our guestbook!
 
 In your terminal, type: `python3 server.py`
 
-Navigate to `http://localhost:8000/cgi-bin/script.py` and you should see the guestbook
-in all it's glory! It should look something like [this](/assets/img/final.png)
+Navigate to `http://localhost:8000/cgi-bin/script.py` and you should see the guestbook in all it's glory! It should look something like [this](/assets/img/final.png)
 
 ---
 
@@ -110,8 +111,9 @@ in all it's glory! It should look something like [this](/assets/img/final.png)
 - [@tef](https://twitter.com/tef) for the idea to go "Web 1.0" and use cgi in the first place as well as helping me debug
 - [@jennschiffer](https://twitter.com/jennschiffer) for creating [make8bitart.com](http://make8bitart.com) so I could make sick graphics
 - [Lissa Explains](http://lissaexplains.com) for still serving as inspiration, after all these years.
-- [pkqk](https://www.twitter.com/pkqk) and [tom](https://twitter.com/tomwhoscontrary) for helping me with the tricky bits
+- [@pkqk](https://www.twitter.com/pkqk) and [@tom](https://twitter.com/tomwhoscontrary) for being patient and helpful
 
 ---
 
 ## Changelog:
+- 13/01/2014: Guestbook released
