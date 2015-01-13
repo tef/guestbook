@@ -21,7 +21,7 @@ main {
 
 .sign {
     text-align: center;
-    margin-bottom: 1em;
+    margin: 0 0 1em 0;
 }
 
 .sign a {
@@ -29,7 +29,7 @@ main {
 }
 
 hr {
-    border: 0;
+    border: none;
     height: 37px;
     background: url(/assets/img/hr.png) 50% 0 no-repeat;
     margin: 1.5em 0;
@@ -92,19 +92,19 @@ input {
 textarea {
     border: none;
     border-radius: 0;
-    margin-bottom: 0.5em;
+    margin: 0 0 0.5em 0;
 }
 
 input[type="text"] {
     border: none;
     padding: 0.5em;
-    margin-bottom: 0.5em;
+    margin: 0 0 0.5em 0;
 }
 
 input[type="email"] {
     border: none;
     padding: 0.5em;
-    margin-bottom: 0.5em;
+    margin: 0 0 0.5em 0;
 }
 
 input[type="submit"] {
