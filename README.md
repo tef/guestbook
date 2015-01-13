@@ -58,15 +58,19 @@ Within your virtual environment run the following command:
 
 `pip install -r requirements.txt`
 
+You can check to make sure the requirements are installed by running:
+
+`pip freeze`
+
+This should display peewee as the only package installed.
+
 ### Step Three: Create your database!
 
 First, check out the `database.py` file. This is what we will run to create our database.
-The line: `DATABASE = "guestbook.db"` sets the name of your database. If you want
-it to be called something else, change `"guestbook.db"` to "`whateveryouwant.db`"
+The line: `DATABASE = "guestbook.db"` sets the name of your database.
 
 Second, check out the dummy posts that will be created when you run this file.
-Unless you change it, it will create some default posts in my name. Feel free to change the details
-or delete these dummy posts altogether!
+Unless you change it, it will create some default posts in my name. Feel free to change the details or delete these dummy posts altogether!
 
 Thirdly, uncomment the single line of code `create_tables()`. This will make sure
 that a database is created for you with your chosen name so you can work with the guestbook.
