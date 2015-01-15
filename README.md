@@ -117,3 +117,4 @@ Navigate to `http://localhost:8000/cgi-bin/script.py` and you should see the gue
 
 ## Changelog:
 - 13/01/2014: Guestbook released
+- 15/01/2014: Minor updates: Merged #14 and made all code PEP8 compliant
