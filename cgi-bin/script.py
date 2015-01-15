@@ -17,10 +17,9 @@ DATABASE = "guestbook.db"
 # Tell peewee it is working with a Sqlite database
 database = SqliteDatabase(DATABASE)
 
+
 # All models will inherit from BaseModel, it saves us defining the database
 # to use every time we create a new model
-
-
 class BaseModel(Model):
 
     class Meta:
