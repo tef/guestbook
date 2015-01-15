@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 import cgi
-# cgitb allows us to view cgi errors, best to comment it out when using in production
-import cgitb; cgitb.enable()
+# cgitb allows us to view cgi errors, best to comment it out for in production
+import cgitb
+cgitb.enable()
 # `re` allows us to work with regular expressions
 import re
 
@@ -16,13 +17,17 @@ DATABASE = "guestbook.db"
 # Tell peewee it is working with a Sqlite database
 database = SqliteDatabase(DATABASE)
 
-# All models will inherit from this BaseModel, it saves us defining the database
+# All models will inherit from BaseModel, it saves us defining the database
 # to use every time we create a new model
+
+
 class BaseModel(Model):
+
     class Meta:
         database = database
 
-# This is the model that lists all the information the guestbook form will collect
+
+# This is the model that lists all the info the guestbook form will collect
 class Post(BaseModel):
     name = CharField()
     email = CharField(null=True)
@@ -32,6 +37,7 @@ class Post(BaseModel):
 
 # This is where we will insert our guestbook posts
 template_file = "index.html"
+
 
 def display(content):
     """ Displays HTML within the template file
@@ -61,12 +67,13 @@ def display(content):
     # Print the substituted content
     print(sub_result[0])
 
+
 def guestbook():
     """ Retrieves the posts from the database and converts them to HTML
     """
 
     guestbook_post = ""
-    # limit(10) means that only the latest ten guestbook posts will be displayed
+    # limit(10) means that only the latest ten posts will be displayed
     # For each of the ten posts, conver them to HTML
     for post in Post.select().limit(10).order_by(Post.date.desc()):
         # Start the individual post HTML
@@ -91,14 +98,17 @@ def guestbook():
                                 </span>
                               """.format(post.email)
 
-        # If a website was submitted, and begins with "http://" or "https://", add to post
-        if post.website and (post.website.startswith("http://") or post.website.startswith("https://")):
+        # If website submitted and begins with "http://"
+        # or "https://", add it to the post
+        if post.website and (post.website.startswith("http://") or
+                             post.website.startswith("https://")):
             guestbook_post += """<span class='website'>
                                     | <a href='{0}' tabindex="1">WWW</a>
                                  </span>
                               """.format(post.website)
-        # Else if there is a website but it doesn't start with "http://" or https://
-        # Add "http://" to the start of the URL and add it to the post
+
+        # Else if there is a website that doesn't start with "http://" or
+        # https://, add "http://" to start of the URL and add URL to the post
         elif post.website:
             guestbook_post += """<span class='website'>
                                     | <a href='http://{0}' tabindex="1">WWW</a>
@@ -117,7 +127,7 @@ def guestbook():
             Currently executed each time the script is loaded (which is bad)
         """
 
-        # The counter is stored in 'counter.txt', open the file for reading (r+)
+        # The counter is stored in 'counter.txt', open it for reading (r+)
         counter = open("counter.txt", "r")
         line = counter.readline()
         counter.close()
@@ -155,6 +165,7 @@ def guestbook():
     # Return the guestbook posts HTML, followed by the visitor counter
     return guestbook_post + visitor_counter()
 
+
 def create_post():
     """ Creates a post in the database depending on the form information submitted
     """
@@ -165,22 +176,23 @@ def create_post():
     except:
         comment = "I didn't enter a comment :("
 
-    # If no name was submitted exists, ask the person to try again and stop the script
+    # If no name was submitted, ask the person to try again and stop the script
     try:
         name = form["name"].value
     except:
         print("Content-type: text/html")
         print()
-        print("You need to at least submit a name. Please go back and try again!")
+        print("You need to at least submit a name. \
+              Please go back and try again!")
         raise SystemExit
 
-    # If no email submitted, set it as 'None' so it can be passed to the database
+    # If no email, set it as 'None' so it can be passed to the database
     try:
         email = form["email"].value
     except:
         email = None
 
-    # If no website submitted, set it as 'None' so it can be passed to the database
+    # If no website, set it as 'None' so it can be passed to the database
     try:
         website = form["website"].value
     except:
@@ -198,8 +210,8 @@ def create_post():
 # When we've submitted the form, this method will collect all the form data
 form = cgi.FieldStorage()
 
-# If the hidden key does not exist, set it to None which will prevent the script
-# From creating the post
+# If the hidden key does not exist, set it to None which will prevent
+# the script from creating the post
 try:
     key = form["key"].value
 except:
