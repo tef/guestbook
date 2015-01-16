@@ -112,7 +112,7 @@ def create_post(form):
         name=form["name"].value,
         email=email,
         website=website,
-        date=datetime.now().strftime("%H:%M - %d/%m/%y")
+        date=datetime.utcnow()
     )
     return True
 
