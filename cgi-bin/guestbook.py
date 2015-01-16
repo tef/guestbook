@@ -50,19 +50,19 @@ class Visitor(BaseModel):
 database.create_tables([Post, Visitor], True)
 
 def main():
-    method = os.environ['REQUEST_METHOD']
-    query_string = os.environ['QUERY_STRING']
-    script_name = os.environ['SCRIPT_NAME']
+    method = os.environ.get('REQUEST_METHOD', 'GET')
+    query_string = os.environ.get('QUERY_STRING', '')
+    script_name = os.environ.get('SCRIPT_NAME', '/cgi-bin/guestbook.py')
 
     if method == "POST":
         # When we've submitted the form, this method will collect all the form data
         form = cgi.FieldStorage()
         if create_post(form):
             # If successful, redirect to the view guestbook page
-            print("Location: {}".format(script_name))
-            print("Refresh: 0;URL={}".format(script_name)) # Python cgi doesn't like sending redirects.
-            print("")
-            print("Redirecting")
+            print("Location: {}".format(script_name), end="\r\n")
+            print("Refresh: 0;URL={}".format(script_name), end="\r\n") # Python cgi doesn't like sending redirects.
+            print("", end="\r\n")
+            print("Redirecting", end="\r\n")
         else:
             # Or show an error
             display("<h2>You need to at least submit a name. \
@@ -226,11 +226,11 @@ def display(content, template_file):
         raise Exception(template_error)
 
     # Tell the page that it is HTML
-    print("Content-type: text/html")
+    print("Content-type: text/html", end="\r\n")
     # This blank line MUST be printed after the content-type statement
-    print()
+    print(end="\r\n")
     # Print the substituted content
-    print(sub_result[0])
+    print(sub_result[0], end="\r\n")
 
 if __name__ == "__main__":
     main()
