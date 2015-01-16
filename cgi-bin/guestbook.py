@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
 
 import cgi
-# cgitb allows us to view cgi errors, best to comment it out for in production
 import cgitb
-cgitb.enable()
-# `re` allows us to work with regular expressions
 import re
-
-# Peewee allows us to work with the guestbook database
-from peewee import *
+import os
 from datetime import datetime
+
+import peewee as pw
+
+# cgitb allows us to view cgi errors, best to comment it out for in production
+cgitb.enable()
 
 
 # Tell peewee what the database file is
 DATABASE = "guestbook.db"
 # Tell peewee it is working with a Sqlite database
-database = SqliteDatabase(DATABASE)
+database = pw.SqliteDatabase(DATABASE)
 
 
 # All models will inherit from BaseModel, it saves us defining the database
 # to use every time we create a new model
-class BaseModel(Model):
+class BaseModel(pw.Model):
 
     class Meta:
         database = database
@@ -28,18 +28,13 @@ class BaseModel(Model):
 
 # This is the model that lists all the info the guestbook form will collect
 class Post(BaseModel):
-    name = CharField()
-    email = CharField(null=True)
-    website = CharField(null=True)
-    comment = TextField()
-    date = DateTimeField()
+    name = pw.CharField()
+    email = pw.CharField(null=True)
+    website = pw.CharField(null=True)
+    comment = pw.TextField()
+    date = pw.DateTimeField()
 
-# This is where we will insert our guestbook posts
-template_file = "index.html"
-
-database.create_tables([Post], True)
-
-def display(content):
+def display(content, template_file):
     """ Displays HTML within the template file
 
         Subsitutes "<!--INSERT CONTENT HERE-->" within the index file
@@ -166,7 +161,7 @@ def guestbook():
     return guestbook_post + visitor_counter()
 
 
-def create_post():
+def create_post(form, database):
     """ Creates a post in the database depending on the form information submitted
     """
 
@@ -207,19 +202,16 @@ def create_post():
         date=datetime.now().strftime("%H:%M - %d/%m/%y")
     )
 
-# When we've submitted the form, this method will collect all the form data
-form = cgi.FieldStorage()
+method = os.environ['REQUEST_METHOD']
 
-# If the hidden key does not exist, set it to None which will prevent
-# the script from creating the post
-try:
-    key = form["key"].value
-except:
-    key = None
+# This is where we will insert our guestbook posts
+template_file = "assets/html/index.html"
 
-# If the hidden key within the form is present, try to create a post
-if key == "process":
-    create_post()
 
-# Display the guestbook!
-display(guestbook())
+if method == "POST":
+    # When we've submitted the form, this method will collect all the form data
+    form = cgi.FieldStorage()
+    create_post(form)
+else:
+    # Display the guestbook!
+    display(guestbook(), template_file)
