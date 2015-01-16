@@ -52,7 +52,7 @@ def display(content, template_file):
 
     # Replace "INSERT CONTENT HERE" with 'content'
     sub_result = re.subn("<!--INSERT CONTENT HERE-->", content, template_input)
-    if sub_result[1] == 0:
+    if sub_result[1] == 0 and content:
         raise Exception(template_error)
 
     # Tell the page that it is HTML
@@ -63,7 +63,7 @@ def display(content, template_file):
     print(sub_result[0])
 
 
-def guestbook():
+def render_guestbook():
     """ Retrieves the posts from the database and converts them to HTML
     """
 
@@ -116,52 +116,51 @@ def guestbook():
 
                              <hr>
                           """
+    return guestbook_post
 
-    def visitor_counter():
-        """ Displays the number of visitors to the website
-            Currently executed each time the script is loaded (which is bad)
-        """
+def visitor_counter():
+    """ Displays the number of visitors to the website
+        Currently executed each time the script is loaded (which is bad)
+    """
 
-        # The counter is stored in 'counter.txt', open it for reading (r+)
-        counter = open("counter.txt", "r")
-        line = counter.readline()
-        counter.close()
+    # The counter is stored in 'counter.txt', open it for reading (r+)
+    counter = open("counter.txt", "r")
+    line = counter.readline()
+    counter.close()
 
-        # If 'counter.txt' is empty, add a count of one,
-        # If a number already exists, add one to it
-        if line == "":
-            number = 1
-        else:
-            number = int(line) + 1
+    # If 'counter.txt' is empty, add a count of one,
+    # If a number already exists, add one to it
+    if line == "":
+        number = 1
+    else:
+        number = int(line) + 1
 
-        # Open counter for writing
-        counter = open("counter.txt", "w")
-        # Add the counter to counter.txt
-        counter.write(str(number))
-        # Close the counter.txt file
-        counter.close()
+    # Open counter for writing
+    counter = open("counter.txt", "w")
+    # Add the counter to counter.txt
+    counter.write(str(number))
+    # Close the counter.txt file
+    counter.close()
 
-        # Add the counter to the index page
-        if number == 1:
-            visits = """
-            <div id="counter">
-                <p id="count">{0} visitor</p>
-            </div>
-            """.format(number)
-        else:
-            visits = """
-            <div id="counter">
-                <p id="count">{0} visitors</p>
-            </div>
-            """.format(number)
+    # Add the counter to the index page
+    if number == 1:
+        visits = """
+        <div id="counter">
+            <p id="count">{0} visitor</p>
+        </div>
+        """.format(number)
+    else:
+        visits = """
+        <div id="counter">
+            <p id="count">{0} visitors</p>
+        </div>
+        """.format(number)
 
-        return visits
-
-    # Return the guestbook posts HTML, followed by the visitor counter
-    return guestbook_post + visitor_counter()
+    return visits
 
 
-def create_post(form, database):
+
+def create_post(form):
     """ Creates a post in the database depending on the form information submitted
     """
 
@@ -203,15 +202,22 @@ def create_post(form, database):
     )
 
 method = os.environ['REQUEST_METHOD']
+query_string = os.environ['QUERY_STRING']
+
 
 # This is where we will insert our guestbook posts
-template_file = "assets/html/index.html"
 
 
 if method == "POST":
     # When we've submitted the form, this method will collect all the form data
     form = cgi.FieldStorage()
     create_post(form)
+elif query_string == "sign":
+    template_file = "assets/html/form.html"
+    display("", template_file)
+
 else:
     # Display the guestbook!
-    display(guestbook(), template_file)
+    template_file = "assets/html/index.html"
+    
+    display(render_guestbook() + visitor_counter(), template_file)
