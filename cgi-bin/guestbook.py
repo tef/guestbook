@@ -14,8 +14,11 @@ cgitb.enable()
 template_file = "assets/html/index.html"
 form_template_file = "assets/html/form.html"
 
-DATABASE = "guestbook.db"
-database = pw.SqliteDatabase(DATABASE)
+DATABASE = os.environ.get("DATABASE_URL","guestbook.db")
+if DATABASE.startswith("postgres"):
+    database = pw.PostgresqlDatabase(DATABASE)
+else:
+    database = pw.SqliteDatabase(DATABASE)
 
 # All models will inherit from BaseModel, it saves us defining the database
 # to use every time we create a new model
@@ -32,8 +35,10 @@ class Post(BaseModel):
     comment = pw.TextField()
     date = pw.DateTimeField()
 
+class Visitor(BaseModel):
+    count = pw.IntegerField(default=0)
 
-database.create_tables([Post], True)
+database.create_tables([Post, Visitor], True)
 
 def main():
     method = os.environ['REQUEST_METHOD']
@@ -46,7 +51,7 @@ def main():
         if create_post(form):
             # If successful, redirect to the view guestbook page
             print("Location: {}".format(script_name))
-            print("Refresh: 0;URL={}".format(script_name))
+            print("Refresh: 0;URL={}".format(script_name)) # Python cgi doesn't like sending redirects.
             print("")
             print("Redirecting")
         else:
@@ -62,33 +67,7 @@ def main():
         
         display(render_guestbook() + visitor_counter(), template_file)
 
-def display(content, template_file):
-    """ Displays HTML within the template file
 
-        Subsitutes "<!--INSERT CONTENT HERE-->" within the index file
-        content = the HTML you wish to display
-    """
-
-    # Open template file in read only mode
-    template_handle = open(template_file, "r")
-    # Read the entire file as a string
-    template_input = template_handle.read()
-    # Close the file
-    template_handle.close()
-
-    template_error = "There was a problem with the HTML template"
-
-    # Replace "INSERT CONTENT HERE" with 'content'
-    sub_result = re.subn("<!--INSERT CONTENT HERE-->", content, template_input)
-    if sub_result[1] == 0 and content:
-        raise Exception(template_error)
-
-    # Tell the page that it is HTML
-    print("Content-type: text/html")
-    # This blank line MUST be printed after the content-type statement
-    print()
-    # Print the substituted content
-    print(sub_result[0])
 
 def create_post(form):
     """ Creates a post in the database depending on the form information submitted
@@ -188,24 +167,17 @@ def visitor_counter():
         Currently executed each time the script is loaded (which is bad)
     """
 
-    # The counter is stored in 'counter.txt', open it for reading (r+)
-    counter = open("counter.txt", "r")
-    line = counter.readline()
-    counter.close()
+    with database.atomic():
+        visitors =  list(Visitor.select().limit(1))
+        if not visitors:
+            visitor = Visitor.create(count=1)
+        else:
+            visitor = visitors[0]
 
-    # If 'counter.txt' is empty, add a count of one,
-    # If a number already exists, add one to it
-    if line == "":
-        number = 1
-    else:
-        number = int(line) + 1
+        visitor.count = visitor.count + 1
+        visitor.save()
 
-    # Open counter for writing
-    counter = open("counter.txt", "w")
-    # Add the counter to counter.txt
-    counter.write(str(number))
-    # Close the counter.txt file
-    counter.close()
+    number = visitor.count
 
     # Add the counter to the index page
     if number == 1:
@@ -222,6 +194,34 @@ def visitor_counter():
         """.format(number)
 
     return visits
+
+def display(content, template_file):
+    """ Displays HTML within the template file
+
+        Subsitutes "<!--INSERT CONTENT HERE-->" within the index file
+        content = the HTML you wish to display
+    """
+
+    # Open template file in read only mode
+    template_handle = open(template_file, "r")
+    # Read the entire file as a string
+    template_input = template_handle.read()
+    # Close the file
+    template_handle.close()
+
+    template_error = "There was a problem with the HTML template"
+
+    # Replace "INSERT CONTENT HERE" with 'content'
+    sub_result = re.subn("<!--INSERT CONTENT HERE-->", content, template_input)
+    if sub_result[1] == 0 and content:
+        raise Exception(template_error)
+
+    # Tell the page that it is HTML
+    print("Content-type: text/html")
+    # This blank line MUST be printed after the content-type statement
+    print()
+    # Print the substituted content
+    print(sub_result[0])
 
 if __name__ == "__main__":
     main()
