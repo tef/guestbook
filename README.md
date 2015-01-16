@@ -21,7 +21,7 @@ CGI was [introduced in 1993](http://en.wikipedia.org/wiki/Common_Gateway_Interfa
 the move from websites just displaying static HTML (unmodified by scripts) to being
 able to run scripts on your web server and displaying the results on your website.
 
-In this project; the script `script.py` fetches the guestbook posts within the database, and displays them within the `index.html` template. I have not written
+In this project; the script `guestbook.py` fetches the guestbook posts within the database, and displays them within the `index.html` template. I have not written
 the HTML for each individual post within the index template, the script does that
 for me. The cgi server within `server.py` allows me to do this on the website itself,
 each time someone visits the guestbook the cgi script is activated and the posts
@@ -68,42 +68,19 @@ You can check to make sure the requirements are installed by running:
 
 This should display peewee as the only package installed.
 
-### Step Three: Create your database!
-
-First, check out the `database.py` file. This is what we will run to create our database.
-The line: `DATABASE = "guestbook.db"` sets the name of your database.
-
-Second, check out the dummy posts that will be created when you run this file.
-Unless you change it, it will create some default posts in my name. Feel free to change the details or delete these dummy posts altogether!
-
-Thirdly, uncomment the single line of code `create_tables()`. This will make sure
-that a database is created for you with your chosen name so you can work with the guestbook.
-
-Lastly, run the following in your terminal (within the virtual env and project directory):
-
-`python3 database.py`
-
-If you see `"Created the database!"` then you have successfully created your database!
-You can now comment out `create_tables()`. If you want to re-create your database
-you can delete the database file, uncomment `create_tables()` and run `python3 database.py` again.
-
 ### Step Four: Run the guestbook!
-Take a look at the `server.py` file. It's a small file that will allow you to run
-the files within this project locally on your machine. I've made it so the project files will run on localhost:8000. Feel free to change the `PORT`
-within the server file.
-
-Now, check out `script.py` within the `cgi-bin` folder.
+Check out `guestbook.py` within the `cgi-bin` folder.
 The only thing you need to do is make sure the first line is correct. Currently it
-reads `#!/usr/bin/env python3`. This statement needs to be at the top of script.py
+reads `#!/usr/bin/env python3`. This statement needs to be at the top of guestbook.py
 so cgi knows what python version it is using.
 
-Know that `script.py` must live within the cgi-bin folder or else it won't work!
+Know that `guestbook.py` must live within the cgi-bin folder or else it won't work!
 
 Now, we're ready to run our guestbook!
 
-In your terminal, type: `python3 server.py`
+In your terminal, type: `python3 -m http.server --cgi`
 
-Navigate to `http://localhost:8000/cgi-bin/script.py` and you should see the guestbook in all it's glory! It should look something like [this](/assets/img/final.png)
+Navigate to `http://localhost:8000/cgi-bin/guestbook.py` and you should see the guestbook in all it's glory! It should look something like [this](/assets/img/final.png)
 
 ---
 
