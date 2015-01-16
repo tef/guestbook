@@ -46,7 +46,9 @@ def main():
         if create_post(form):
             # If successful, redirect to the view guestbook page
             print("Location: {}".format(script_name))
-            print("ButtLocation: {}".format(script_name))
+            print("Refresh: 0;URL={}".format(script_name))
+            print("")
+            print("Redirecting")
         else:
             # Or show an error
             display("<h2>You need to at least submit a name. \
@@ -133,7 +135,7 @@ def render_guestbook():
     guestbook_post = ""
     # limit(10) means that only the latest ten posts will be displayed
     # For each of the ten posts, conver them to HTML
-    for post in Post.select().limit(10).order_by(Post.date.desc()):
+    for post in Post.select().order_by(Post.date.desc()).limit(10):
         # Start the individual post HTML
         guestbook_post += """<article class='post' role="article">
                                 <div class='comment'>
