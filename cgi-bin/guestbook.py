@@ -4,6 +4,7 @@ import cgi
 import cgitb
 import re
 import os
+import urllib
 from datetime import datetime
 
 import peewee as pw
@@ -16,7 +17,15 @@ form_template_file = "assets/html/form.html"
 
 DATABASE = os.environ.get("DATABASE_URL","guestbook.db")
 if DATABASE.startswith("postgres"):
-    database = pw.PostgresqlDatabase(DATABASE)
+    urllib.parse.uses_netloc.append("postgres")
+    url = urllib.parse.urlparse(DATABASE)
+    database = pw.PostgresqlDatabase(
+        url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
 else:
     database = pw.SqliteDatabase(DATABASE)
 
