@@ -37,6 +37,7 @@ class Post(BaseModel):
 # This is where we will insert our guestbook posts
 template_file = "index.html"
 
+database.create_tables([Post], True)
 
 def display(content):
     """ Displays HTML within the template file
