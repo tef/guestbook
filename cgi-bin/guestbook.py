@@ -11,17 +11,15 @@ import peewee as pw
 # cgitb allows us to view cgi errors, best to comment it out for in production
 cgitb.enable()
 
+template_file = "assets/html/index.html"
+form_template_file = "assets/html/form.html"
 
-# Tell peewee what the database file is
 DATABASE = "guestbook.db"
-# Tell peewee it is working with a Sqlite database
 database = pw.SqliteDatabase(DATABASE)
-
 
 # All models will inherit from BaseModel, it saves us defining the database
 # to use every time we create a new model
 class BaseModel(pw.Model):
-
     class Meta:
         database = database
 
@@ -33,6 +31,34 @@ class Post(BaseModel):
     website = pw.CharField(null=True)
     comment = pw.TextField()
     date = pw.DateTimeField()
+
+
+database.create_tables([Post], True)
+
+def main():
+    method = os.environ['REQUEST_METHOD']
+    query_string = os.environ['QUERY_STRING']
+    script_name = os.environ['SCRIPT_NAME']
+
+    if method == "POST":
+        # When we've submitted the form, this method will collect all the form data
+        form = cgi.FieldStorage()
+        if create_post(form):
+            # If successful, redirect to the view guestbook page
+            print("Location: {}".format(script_name))
+            print("ButtLocation: {}".format(script_name))
+        else:
+            # Or show an error
+            display("<h2>You need to at least submit a name. \
+                  Please try again!</h2>", form_template_file)
+    elif query_string == "sign":
+        # Use a different template
+        display("", form_template_file)
+    else:
+        # Display the guestbook!
+        template_file = "assets/html/index.html"
+        
+        display(render_guestbook() + visitor_counter(), template_file)
 
 def display(content, template_file):
     """ Displays HTML within the template file
@@ -62,6 +88,43 @@ def display(content, template_file):
     # Print the substituted content
     print(sub_result[0])
 
+def create_post(form):
+    """ Creates a post in the database depending on the form information submitted
+    """
+
+    # If no comment was submitted, set a default
+    try:
+        comment = form["comment"].value
+    except:
+        comment = "I didn't enter a comment :("
+
+    # If no name was submitted, ask the person to try again and stop the script
+    try:
+        name = form["name"].value
+    except:
+        return False
+
+    # If no email, set it as 'None' so it can be passed to the database
+    try:
+        email = form["email"].value
+    except:
+        email = None
+
+    # If no website, set it as 'None' so it can be passed to the database
+    try:
+        website = form["website"].value
+    except:
+        website = None
+
+    # Create a post in the database using the form information!
+    post = Post.create(
+        comment=comment,
+        name=form["name"].value,
+        email=email,
+        website=website,
+        date=datetime.now().strftime("%H:%M - %d/%m/%y")
+    )
+    return True
 
 def render_guestbook():
     """ Retrieves the posts from the database and converts them to HTML
@@ -158,66 +221,6 @@ def visitor_counter():
 
     return visits
 
+if __name__ == "__main__":
+    main()
 
-
-def create_post(form):
-    """ Creates a post in the database depending on the form information submitted
-    """
-
-    # If no comment was submitted, set a default
-    try:
-        comment = form["comment"].value
-    except:
-        comment = "I didn't enter a comment :("
-
-    # If no name was submitted, ask the person to try again and stop the script
-    try:
-        name = form["name"].value
-    except:
-        print("Content-type: text/html")
-        print()
-        print("You need to at least submit a name. \
-              Please go back and try again!")
-        raise SystemExit
-
-    # If no email, set it as 'None' so it can be passed to the database
-    try:
-        email = form["email"].value
-    except:
-        email = None
-
-    # If no website, set it as 'None' so it can be passed to the database
-    try:
-        website = form["website"].value
-    except:
-        website = None
-
-    # Create a post in the database using the form information!
-    post = Post.create(
-        comment=comment,
-        name=form["name"].value,
-        email=email,
-        website=website,
-        date=datetime.now().strftime("%H:%M - %d/%m/%y")
-    )
-
-method = os.environ['REQUEST_METHOD']
-query_string = os.environ['QUERY_STRING']
-
-
-# This is where we will insert our guestbook posts
-
-
-if method == "POST":
-    # When we've submitted the form, this method will collect all the form data
-    form = cgi.FieldStorage()
-    create_post(form)
-elif query_string == "sign":
-    template_file = "assets/html/form.html"
-    display("", template_file)
-
-else:
-    # Display the guestbook!
-    template_file = "assets/html/index.html"
-    
-    display(render_guestbook() + visitor_counter(), template_file)
